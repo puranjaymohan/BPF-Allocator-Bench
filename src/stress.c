@@ -51,6 +51,7 @@ int main(int argc, char **argv)
 		(void)syscall(__NR_getuid);
 		(void)syscall(__NR_getpriority);
 		(void)syscall(__NR_geteuid);
+		usleep(100000);
 	}
 
 cleanup:
