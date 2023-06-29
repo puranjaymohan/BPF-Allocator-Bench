@@ -28,6 +28,13 @@ else
 	CMD="$1"
 fi
 
+if [[ ! -n $2 ]];
+then
+	NUM=20
+else
+	NUM=$2
+fi
+
 if ! command -v "${SCRIPTPATH}"/stress &> /dev/null
 then
 	echo "stress executable not found! Please run make"
@@ -36,10 +43,10 @@ fi
 
 echo ""
 
-echo "Starting 20 instances of stress"
-echo "This will load 160 eBPF programs and trigger 100 of them continuously"
+echo "Starting ${NUM} instances of stress"
+echo "This will load ${NUM}x8 eBPF programs and trigger ${NUM}x5 of them continuously"
 
-for i in {1..20}
+for (( i=1; i<=$NUM; i++ ))
 do
 	("${SCRIPTPATH}"/stress > /dev/null 2>&1) &
 done
